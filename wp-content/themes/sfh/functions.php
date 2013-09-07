@@ -1,10 +1,17 @@
 <?php
 
 //---------------------------------------------------------------------------------
-//	Aktivera den inbyggda menyfunktionalliteten
+//	Aktivera olika inbyggda funktioner
 //---------------------------------------------------------------------------------
 
 add_theme_support( 'menus' );
+add_theme_support( 'post-thumbnails' );
+
+//---------------------------------------------------------------------------------
+//	Bildformat
+//---------------------------------------------------------------------------------
+
+add_image_size( 'topImage', 711, 355, true );
 
 
 //---------------------------------------------------------------------------------
@@ -26,7 +33,7 @@ if ( function_exists('register_sidebar') )
 
 if (!is_admin()) {
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"), false);
+	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"), false);
 	wp_enqueue_script('jquery');
 }
 

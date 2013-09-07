@@ -1,0 +1,282 @@
+@import 'reset.css';
+
+// --- Variables
+
+@maxwidth: 1080px;
+@nbrOfCols: 9;
+
+@bodyfont: 'Crimson Text', Georgia, serif;
+@headerfont: 'Crimson Text', Georgia, serif;
+@bodyfontsize: 16px;
+
+@backgroundcolor: #F5F5F5;
+
+// --- Mixins and reusables
+
+img.responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.capitals {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// From: http://css-tricks.com/snippets/css/useful-css3-less-mixins/
+.gradient (@startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+// --- Structure
+
+// Typography
+
+body {
+  font: 400 @bodyfontsize @bodyfont;
+  line-height: 1.4em;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: @headerfont;
+  font-weight: 400;
+  line-height: 1.1em;
+  margin-bottom: 7px;
+  .capitals;
+  
+  .title {
+    margin-top: 0px;
+  }
+}
+h1 {
+  font-size: @bodyfontsize * 2;
+}
+h2 {
+  font-size: @bodyfontsize * 1.6;
+}
+h3 {
+  font-size: @bodyfontsize * 1.3;
+}
+h4 {
+  font-size: @bodyfontsize;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 7px;
+}
+
+// Grid
+
+.wrapper {
+  width: 90%;
+  max-width: @maxwidth; 
+  margin: 0 auto;
+  position: relative;
+}
+
+.container(@n) {
+  float: left; 
+  margin-left: 0; 
+  margin-right: 0; 
+  padding: 0;
+  position: relative;
+  width: 100% * @n/@nbrOfCols;
+}
+
+.container_1 { .container(1); }
+.container_2 { .container(2); }
+.container_3 { .container(3); }
+.container_4 { .container(4); }
+.container_5 { .container(5); }
+.container_6 { .container(6); }
+.container_7 { .container(7); }
+.container_8 { .container(8); }
+.container_9 { .container(9); }
+
+.inside {
+  margin: 7px;
+  // background: rgba(0,0,0,0.1);
+}
+
+.clear { 
+  width: 100%;
+  clear: both; 
+}
+
+// Color and texture
+
+body {
+  background: url(../img/tweed.png);
+  background-size: 200px;
+}
+.wrapper {
+  background: @backgroundcolor;
+  //border-left: 10px solid @backgroundcolor;
+  //border-right: 10px solid @backgroundcolor;
+  padding: 10px 10px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+
+// --- Specifics
+
+// Header
+
+#header {
+  position: relative;
+  z-index: 200;
+  margin-top: 130px;
+  .gradient( darken(@backgroundcolor, 6%), @backgroundcolor);
+  border-top: 1px solid #FFF;
+
+  .headerlogo {
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+    border-radius: 100px;
+    margin: -125px auto 0;
+    overflow: hidden;
+    display: block;
+    width: 200px;
+    
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  .headermenu {
+    background: #FF9900;
+    width: 100%;
+    margin: -75px 0 0px;
+    ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      font-size: 0px;
+      li {
+        font-size: @bodyfontsize;
+        display: inline-block;
+        padding: 0px 20px;
+        line-height: 2em;
+        .capitals;
+      }
+      &.left {
+        float: left;
+        li { border-right: 1px solid @backgroundcolor; }
+      }
+      &.right {
+        float: right;
+        li { border-left: 1px solid @backgroundcolor; }
+      }
+    }
+  }
+}
+
+// Frontpage slider
+
+#frontpageSlider {
+
+  margin-top: 14px;
+  margin-bottom: 14px;
+  padding: 10px;
+  
+  #frontpageSliderContainer {
+    
+    margin: 7px;
+    
+    .slide {
+      // background: #FFF;
+      width: 100%;
+      position: relative;
+  
+      .frontpageSliderTextContainer {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        .inside {
+          padding: 7px;
+        }
+      }
+    }
+  
+    /* pager */
+    .cycle-pager {
+      .container_6;
+      text-align: right; 
+      z-index: 500; 
+      position: absolute; 
+      bottom: 0px; 
+      overflow: hidden;
+      padding: 0 14px;
+      height: 26px;
+      box-sizing: border-box;
+      span { 
+        font-family: arial; 
+        font-size: 50px; 
+        line-height: 16px;
+        width: 16px; 
+        height: 16px;
+        margin-left: 3px;
+        display: inline-block; 
+        color: rgba(255,255,255,.5); 
+        cursor: pointer; 
+        &.cycle-pager-active { 
+          color: rgba(255,255,255,1);
+        }
+      }
+      & > * { cursor: pointer;}
+    }
+  }
+}
+
+// Frontpage categorySelector
+ul.categorySelector {
+  background: #DDD;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: 0px;
+  li {
+    display: inline-block;
+    font-size: @bodyfontsize;
+    padding: 0px 14px;
+    line-height: 2em;
+    border-right: 1px solid #FFF;
+    position: relative;
+    &.active::after {
+      @size: 7px;
+      display: block;
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0px;
+      margin: 0px 0px 0px -1 * @size;
+      border: @size solid transparent;
+      border-bottom-color: #FFF;
+    }
+  }
+}
+
+// Articles
+
+article {
+  padding: 10px 0px 7px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #DDD;
+  .topimg {
+    margin: 4px 0 10px;
+  }
+}
+
+
+
+
+@import 'helpers.css';
