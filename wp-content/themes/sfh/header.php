@@ -50,14 +50,19 @@
         ?>
         
         <div class="headermenu">
-          <ul class="left">
-            <li>Huset</li>
-            <li>Evenemang</li>
-          </ul>
-          <ul class="right">
-            <li>Föreningen</li>
-            <li>Kontakt</li>
-          </ul>
+        
+          <?php wp_nav_menu( array(
+            'menu'            => 'Meny Vänster',
+            'container'       => 'ul',
+            'menu_class'      => 'left'
+          )); ?>
+        
+          <?php wp_nav_menu( array(
+            'menu'            => 'Meny Höger',
+            'container'       => 'ul',
+            'menu_class'      => 'right'
+          )); ?>
+          
           <div class="clear"></div>
         </div>
         
