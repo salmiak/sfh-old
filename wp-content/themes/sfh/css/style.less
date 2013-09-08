@@ -74,6 +74,11 @@ p {
 
 // Grid
 
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
 .wrapper {
   width: 90%;
   max-width: @maxwidth; 
@@ -205,6 +210,7 @@ body {
         position: absolute;
         bottom: 0px;
         right: 0px;
+        min-height: 200px;
         .inside {
           padding: 7px;
         }
@@ -280,7 +286,33 @@ article {
   }
 }
 
+// Footer
 
+footer {
+  background: #99CFE0;
+  padding: 21px 0 0;
+  margin: -28px 0 0;
+  border-top: 2px solid darken(#99CFE0, 20%);
+  .wrapper {
+    margin-bottom: 0px;
+    padding: 0px 0px 30px;
+    background: none;
+  }
+}
+
+.map {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 7px;
+line-height: 200px;
+text-align: center;
+background: #ddd;
+color: #bbb;
+}
+adress {
+  display: block;
+  margin: 0px 0px 7px;
+}
 
 
 @import 'helpers.css';
