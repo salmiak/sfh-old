@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import 'reset.less';
 
 // --- Variables
 
@@ -7,6 +7,7 @@
 
 @bodyfont: 'Crimson Text', Georgia, serif;
 @headerfont: 'Crimson Text', Georgia, serif;
+@sansseriffont: 'Open Sans', sans-serif;
 @bodyfontsize: 16px;
 
 @backgroundcolor: #F5F5F5;
@@ -14,7 +15,7 @@
 // --- Mixins and reusables
 
 img.responsive {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
 }
@@ -34,6 +35,43 @@ img.responsive {
 	background: -o-linear-gradient(top, @startColor, @endColor);
 }
 
+// Date icon
+.dateIcon {
+  @color: rgba(0,0,0,.3);
+  font-family: @sansseriffont;
+  font-weight: bold;
+  text-align: center;
+  width: 64px;
+  
+  .day {
+    line-height: 40px;
+    font-size: 32px;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid @color;
+    color: @color;
+    display: block;
+    margin: 0;
+    border-bottom: none;
+  }
+  .month {
+    line-height: 20px;
+    font-size: 12px;
+    border-radius: 0 0 12px 12px;
+    background: @color;
+    color: @backgroundcolor;
+    display: block;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .time {
+    line-height: 30px;
+    font-size: 20px;
+    display: block;
+    margin: 0;
+    color: @color;
+  }
+}
+
 // --- Structure
 
 // Typography
@@ -50,7 +88,7 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 7px;
   .capitals;
   
-  .title {
+  &.title {
     margin-top: 0px;
   }
 }
@@ -114,6 +152,8 @@ body {
   width: 100%;
   clear: both; 
 }
+
+.text-right { text-align: right; }
 
 // Color and texture
 
@@ -205,6 +245,12 @@ body {
       // background: #FFF;
       width: 100%;
       position: relative;
+    
+      .dateIcon {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
   
       .frontpageSliderTextContainer {
         position: absolute;
@@ -277,14 +323,27 @@ ul.categorySelector {
 
 // Articles
 
-article {
-  padding: 10px 0px 7px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid #DDD;
-  .topimg {
-    margin: 4px 0 10px;
+//#frontpageContent {
+  article {
+    padding: 10px 0px 7px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #DDD;
+    .topimg {
+      margin: 4px 0 10px;
+    }
+    .content {
+      position: relative;
+      padding-right: 20%;
+      min-height: 90px;
+      .dateIcon {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+    }
   }
-}
+//}
+
 
 // Footer
 
@@ -315,4 +374,4 @@ adress {
 }
 
 
-@import 'helpers.css';
+@import 'helpers.less';
