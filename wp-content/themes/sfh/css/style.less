@@ -5,12 +5,15 @@
 @maxwidth: 1080px;
 @nbrOfCols: 9;
 
-@bodyfont: 'Crimson Text', Georgia, serif;
-@headerfont: 'Crimson Text', Georgia, serif;
-@sansseriffont: 'Open Sans', sans-serif;
+@bodyfont: 'Vollkorn', Georgia, serif;
+@headerfont: 'Playfair Display', Georgia, serif;
+@sansseriffont: 'Raleway', sans-serif;
 @bodyfontsize: 16px;
 
-@backgroundcolor: #F5F5F5;
+@bodybackgroundcolor: #75c3d6;
+@contentbackgroundcolor: #f2f2f2;
+@decorationcolor: #ec4855;
+@footerbackgroundcolor: #1b313a;
 
 // --- Mixins and reusables
 
@@ -58,7 +61,7 @@ img.responsive {
     font-size: 12px;
     border-radius: 0 0 12px 12px;
     background: @color;
-    color: @backgroundcolor;
+    color: @bodybackgroundcolor;
     display: block;
     margin: 0;
     text-transform: uppercase;
@@ -158,16 +161,16 @@ body {
 // Color and texture
 
 body {
-  background: url(../img/tweed.png);
+  background: url(../img/bg.png) @bodybackgroundcolor;
   background-size: 200px;
 }
 .wrapper {
-  background: @backgroundcolor;
+  // background: @contentbackgroundcolor;
   //border-left: 10px solid @backgroundcolor;
   //border-right: 10px solid @backgroundcolor;
-  padding: 10px 10px;
-  margin-top: 14px;
-  margin-bottom: 14px;
+  // padding: 10px 10px;
+  // margin-top: 14px;
+  // margin-bottom: 14px;
 }
 
 
@@ -179,8 +182,6 @@ body {
   position: relative;
   z-index: 200;
   margin-top: 130px;
-  .gradient( darken(@backgroundcolor, 6%), @backgroundcolor);
-  border-top: 1px solid #FFF;
 
   .headerlogo {
     box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
@@ -198,20 +199,24 @@ body {
   }
   
   .headermenu {
-    background: #FF9900;
+    .gradient( lighten(@decorationcolor, 15%), darken(@decorationcolor, 0%) );
     width: 100%;
     margin: -75px 0 0px;
     ul {
       list-style: none;
       margin: 0px;
-      padding: 0px;
+      padding: 0px 10px;
       font-size: 0px;
       li {
-        font-size: @bodyfontsize;
+        font-family: @sansseriffont;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 32px;
+        color: #FFF;
         display: inline-block;
-        padding: 0px 20px;
-        line-height: 2em;
+        padding: 0px 10px;
         .capitals;
+        letter-spacing: 2px;
         a {
           color: inherit;
           text-decoration: none;
@@ -219,11 +224,9 @@ body {
       }
       &.left {
         float: left;
-        li { border-right: 1px solid @backgroundcolor; }
       }
       &.right {
         float: right;
-        li { border-left: 1px solid @backgroundcolor; }
       }
     }
   }
@@ -348,10 +351,10 @@ ul.categorySelector {
 // Footer
 
 footer {
-  background: #99CFE0;
+  background: url(../img/bgFooter.png) @footerbackgroundcolor;
+  color: #FFF;
   padding: 21px 0 0;
   margin: -28px 0 0;
-  border-top: 2px solid darken(#99CFE0, 20%);
   .wrapper {
     margin-bottom: 0px;
     padding: 0px 0px 30px;

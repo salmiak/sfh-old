@@ -15,6 +15,7 @@
         		$the_query->the_post(); ?>
   		
     		<div class="slide">
+    		  <?php the_dateIcon( $post ); ?>
       		<div class="container_6"><div class="frontpageSliderImgContainer">
         		 <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'responsive' ) ) ?>
       		</div></div>
@@ -39,46 +40,6 @@
 		<div class="clear"></div>
 	</div>
 	
-	
-  		<!--<div class="slide">
-    		<div class="container_6"><div class="frontpageSliderImgContainer">
-      		<img src="<?php bloginfo('template_url'); ?>/testimg/event1.jpg" class="responsive" />
-    		</div></div>
-    		<div class="frontpageSliderTextContainer container_3"><div class="inside">
-    		
-    		  <h2 class="title">Rubriken på detta event 1</h2>
-    		  <p>Här är ett eventets beskrivning. Det är lagom långt för att väcka lite intresse.</p>
-    		
-    		</div></div>
-    		<div class="clear"></div>
-  		</div>
-		
-  		<div class="slide">
-    		<div class="container_6"><div class="frontpageSliderImgContainer">
-      		<img src="<?php bloginfo('template_url'); ?>/testimg/event2.jpg" class="responsive" />
-    		</div></div>
-    		<div class="frontpageSliderTextContainer container_3"><div class="inside">
-    		
-    		  <h2 class="title">Rubriken på detta event 2</h2>
-    		  <p>Här är ett eventets beskrivning. Det är lagom långt för att väcka lite intresse.</p>
-    		
-    		</div></div>
-    		<div class="clear"></div>
-  		</div>
-		
-  		<div class="slide">
-    		<div class="container_6"><div class="frontpageSliderImgContainer">
-      		<img src="<?php bloginfo('template_url'); ?>/testimg/event3.jpg" class="responsive" />
-    		</div></div>
-    		<div class="frontpageSliderTextContainer container_3"><div class="inside">
-    		
-    		  <h2 class="title">Rubriken på detta event 3</h2>
-    		  <p>Här är ett eventets beskrivning. Det är lagom långt för att väcka lite intresse.</p>
-    		
-    		</div></div>
-    		<div class="clear"></div>
-  		</div> -->
-	
 	<div id="frontpageContent" class="wrapper">
 		<div id="frontpageEventsFeed" class="container_5">
 		
@@ -99,10 +60,20 @@
       		$the_query->the_post(); ?>
     
   		<article class="inside">
-  		  <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'topimg responsive' ) ) ?>
+  		  <a href="<?php the_permalink(); ?>">
+  		    <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'topimg responsive' ) ) ?>
+  		  </a>
   		  <!-- <img src="<?php bloginfo('template_url'); ?>/testimg/event2.jpg" class="topimg responsive" /> -->
-  		  <h2 class="title"><?php the_title() ?></h2>
-  		  <p><?php the_content() ?></p>
+  		  
+  		  <div class="content">
+  		    <?php the_dateIcon( $post ); ?>
+    		  <a href="<?php the_permalink(); ?>"><h2 class="title"><?php the_title() ?></h2></a>
+    		  <p><?php the_content() ?></p>
+    		  <p class="text-right"><a href="<?php the_permalink(); ?>">Läs mer</a></p>
+  		  </div>
+  		  
+  		  <!-- <?php var_dump($post); ?> -->
+  		  
   		</article>
   		<div class="clear"></div>
       		
@@ -113,34 +84,13 @@
       /* Restore original Post Data */
       wp_reset_postdata();
       ?>
-		
-  		<!--
-  		<article class="inside">
-  		  <img src="<?php bloginfo('template_url'); ?>/testimg/event2.jpg" class="topimg responsive" />
-  		  <h2 class="title">Rubriken på detta event</h2>
-  		  <p>Här är ett eventets beskrivning. Det är lagom långt för att väcka lite intresse.</p>
-  		</article>
-  		<div class="clear"></div>
-		
-  		<article class="inside">
-  		  <h2 class="title">Rubriken på detta event utan bild</h2>
-  		  <p>Här är ett eventets beskrivning. Det är lagom långt för att väcka lite intresse.</p>
-  		</article>
-  		<div class="clear"></div>
-		
-  		<article class="inside">
-  		  <img src="<?php bloginfo('template_url'); ?>/testimg/event1.jpg" class="topimg responsive" />
-  		  <h2 class="title">Rubriken på detta event</h2>
-  		  <p>Här är ett eventets beskrivning. Det är lagom långt för att väcka lite intresse.</p>
-  		</article>
-  		<div class="clear"></div>
-  		-->
   		
 		</div>
 		<div id="frontpageSidebar" class="container_4"><div class="inside">
   		
   		<aside class="">
     		En widget
+    		<?php get_sidebar(); ?>
   		</aside>
   		
 		</div></div>

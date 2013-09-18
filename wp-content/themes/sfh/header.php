@@ -20,8 +20,11 @@
   <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/img/favicon.png">
   
 
-  <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic' rel='stylesheet' type='text/css'>  
-  <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/style.css" type="text/css" charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:900italic|Raleway:400,200,700|Vollkorn:400italic,700italic,400,700' rel='stylesheet' type='text/css'>  
+  <!-- <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/style.css" type="text/css" charset="utf-8"> -->
+  <link rel="stylesheet/less" type="text/css" href="<?php bloginfo('template_url'); ?>/css/style.less" />
+  <script src="<?php bloginfo('template_url'); ?>/js/less.js" type="text/javascript"></script>
+  
   <link  type="text/css" rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
   

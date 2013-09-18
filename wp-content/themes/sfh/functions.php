@@ -13,6 +13,54 @@ add_theme_support( 'post-thumbnails' );
 
 add_image_size( 'topImage', 711, 355, true );
 
+//---------------------------------------------------------------------------------
+//	Date Icon
+//---------------------------------------------------------------------------------
+
+// From ordinary post (ex. front page)
+function the_dateIcon($post , $displayTime = true) {
+  $eventDate = strtotime( $post->EventStartDate ); ?>
+  <div class="dateIcon">
+	  <div class="day"><?php echo date('d',  $eventDate); ?></div>
+	  <div class="month"><?php echo date('M',  $eventDate); ?></div>
+	  <?php if( $displayTime ) { ?>
+	    <div class="time"><?php echo date('G:i',  $eventDate); ?></div>
+	  <?php } ?>
+  </div>
+<?php }
+
+// From inside the tribe plugin (ex. details pages)
+function event_dateIcon( $event = null, $displayTime = true, $dateFormat = '' ) {
+  if ( is_null( $event ) ) {
+      global $post;
+      $event = $post;
+  }
+  if ( is_numeric( $event ) )
+      $event = get_post( $event );
+
+  if( tribe_event_is_all_day( $event ) )
+       $displayTime = false;
+
+  if( empty($event->EventStartDate) && is_object( $event ) )
+      $event->EventStartDate = tribe_get_event_meta( $event->ID, '_EventStartDate', true );
+
+  if( isset($event->EventStartDate) ){
+      $date = strtotime( $event->EventStartDate );
+  }else{
+      return; // '&mdash;';
+  }
+
+  //return tribe_event_format_date($date, $displayTime, $dateFormat );
+  ?>
+  <div class="dateIcon">
+	  <div class="day"><?php echo date('d',  $date); ?></div>
+	  <div class="month"><?php echo date('M',  $date); ?></div>
+	  <?php if( $displayTime ) { ?>
+	    <div class="time"><?php echo date('G:i',  $date); ?></div>
+	  <?php } ?>
+  </div>
+<?php
+}
 
 //---------------------------------------------------------------------------------
 //	Aktivera widgets
