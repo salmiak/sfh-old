@@ -3,7 +3,11 @@
 // --- Variables
 
 @maxwidth: 1080px;
+@minwidth: 600px;
+@margin: 10px;
 @nbrOfCols: 9;
+
+@fast: 0.2s;
 
 @bodyfont: 'Vollkorn', Georgia, serif;
 @headerfont: 'Playfair Display', Georgia, serif;
@@ -14,6 +18,7 @@
 @contentbackgroundcolor: #f2f2f2;
 @decorationcolor: #ec4855;
 @footerbackgroundcolor: #1b313a;
+@textcolor: #444;
 
 // --- Mixins and reusables
 
@@ -22,10 +27,17 @@ img.responsive {
   height: auto;
   display: block;
 }
+img.withFiller {
+  position: absolute;
+  max-width: 100%;
+  top: 0px;
+  left: 0px;
+  height: auto;
+}
 
 .capitals {
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
 }
 
 // From: http://css-tricks.com/snippets/css/useful-css3-less-mixins/
@@ -36,6 +48,15 @@ img.responsive {
 	background: -moz-linear-gradient(top, @startColor, @endColor);
 	background: -ms-linear-gradient(top, @startColor, @endColor);
 	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+.box-shadow ( @string: 0 1px 3px 0px rgba(0,0,0,0.3) ) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+.drop-shadow (@x: 0, @y: 1px, @blur: 3px, @spread: 0, @alpha: 0.3) {
+	.box-shadow (	@x @y @blur @spread rgba(0, 0, 0, @alpha) );
 }
 
 // Date icon
@@ -61,7 +82,7 @@ img.responsive {
     font-size: 12px;
     border-radius: 0 0 12px 12px;
     background: @color;
-    color: @bodybackgroundcolor;
+    color: @contentbackgroundcolor;
     display: block;
     margin: 0;
     text-transform: uppercase;
@@ -87,19 +108,19 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: @headerfont;
   font-weight: 400;
-  line-height: 1.1em;
+  font-style: italic;
+  line-height: 1.2em;
   margin-bottom: 7px;
-  .capitals;
   
   &.title {
     margin-top: 0px;
   }
 }
 h1 {
-  font-size: @bodyfontsize * 2;
+  font-size: @bodyfontsize * 2.5;
 }
 h2 {
-  font-size: @bodyfontsize * 1.6;
+  font-size: @bodyfontsize * 1.8;
 }
 h3 {
   font-size: @bodyfontsize * 1.3;
@@ -113,6 +134,21 @@ p {
   margin: 0 0 7px;
 }
 
+a {
+  color: @decorationcolor;
+  text-decoration: none;
+  -webkit-transition: color @fast;
+  &:hover {
+    color: darken(@decorationcolor, 20%);
+  }
+  .title & {
+    color: @textcolor;
+    &:hover {
+      color: darken(@decorationcolor, 20%);
+    }
+  }
+}
+
 // Grid
 
 body {
@@ -123,8 +159,10 @@ body {
 .wrapper {
   width: 90%;
   max-width: @maxwidth; 
+  min-width: @minwidth;
   margin: 0 auto;
   position: relative;
+  z-index: 10;
 }
 
 .container(@n) {
@@ -147,13 +185,18 @@ body {
 .container_9 { .container(9); }
 
 .inside {
-  margin: 7px;
-  // background: rgba(0,0,0,0.1);
+  margin: @margin;
+  &.withPadding { 
+    padding: @margin; 
+  }
 }
 
 .clear { 
   width: 100%;
   clear: both; 
+  display: block;
+  height: 1px;
+  margin-bottom: -1px;
 }
 
 .text-right { text-align: right; }
@@ -163,6 +206,7 @@ body {
 body {
   background: url(../img/bg.png) @bodybackgroundcolor;
   background-size: 200px;
+  color: @textcolor;
 }
 .wrapper {
   // background: @contentbackgroundcolor;
@@ -184,12 +228,13 @@ body {
   margin-top: 130px;
 
   .headerlogo {
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+  
+    .drop-shadow( 0px, 2px, 5px, 0px, 0.3);
     border-radius: 100px;
     margin: -125px auto 0;
     overflow: hidden;
     display: block;
-    width: 200px;
+    width: 180px;
     
     img {
       display: block;
@@ -199,9 +244,10 @@ body {
   }
   
   .headermenu {
-    .gradient( lighten(@decorationcolor, 15%), darken(@decorationcolor, 0%) );
+    .gradient( saturate(lighten(@decorationcolor, 20%), 10%), darken(@decorationcolor, 0%) );
+    .drop-shadow();
     width: 100%;
-    margin: -75px 0 0px;
+    margin: -65px 0 0px;
     ul {
       list-style: none;
       margin: 0px;
@@ -214,12 +260,17 @@ body {
         line-height: 32px;
         color: #FFF;
         display: inline-block;
-        padding: 0px 10px;
         .capitals;
         letter-spacing: 2px;
         a {
           color: inherit;
           text-decoration: none;
+          display: inline-block;
+          padding: 0px 10px;
+          &:hover {
+            background: lighten(@decorationcolor, 20%);
+            background: rgba(255,255,255,0.2);
+          }
         }
       }
       &.left {
@@ -235,25 +286,36 @@ body {
 // Frontpage slider
 
 #frontpageSlider {
-
-  margin-top: 14px;
-  margin-bottom: 14px;
-  padding: 10px;
   
   #frontpageSliderContainer {
     
-    margin: 7px;
+    margin: @margin;
+    background: @contentbackgroundcolor;
+    border: 1px solid #FFF;
+    .drop-shadow;
     
     .slide {
       // background: #FFF;
       width: 100%;
       position: relative;
+      display: none;
+      
+      &:first-child { display: block; }
     
       .dateIcon {
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: @margin;
+        right: @margin;
       }
+      
+      .frontpageSliderImgContainer {
+        max-height: 355px;
+        overflow: hidden;
+        background: #000;
+        margin: @margin 0 @margin @margin;
+        position: relative;
+      }
+      
   
       .frontpageSliderTextContainer {
         position: absolute;
@@ -261,7 +323,7 @@ body {
         right: 0px;
         min-height: 200px;
         .inside {
-          padding: 7px;
+          padding: @margin;
         }
       }
     }
@@ -272,7 +334,7 @@ body {
       text-align: right; 
       z-index: 500; 
       position: absolute; 
-      bottom: 0px; 
+      bottom: @margin; 
       overflow: hidden;
       padding: 0 14px;
       height: 26px;
@@ -298,28 +360,44 @@ body {
 
 // Frontpage categorySelector
 ul.categorySelector {
-  background: #DDD;
+  background: @contentbackgroundcolor;
   list-style: none;
   margin: 0px;
   padding: 0px;
   font-size: 0px;
+  //border: 1px solid #FFF;
+  .drop-shadow;
   li {
     display: inline-block;
-    font-size: @bodyfontsize;
+    
+    font-family: @sansseriffont;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 32px;
+    .capitals;
+    letter-spacing: 2px;
     padding: 0px 14px;
-    line-height: 2em;
-    border-right: 1px solid #FFF;
+    border-right: 2px solid @bodybackgroundcolor;
     position: relative;
+    cursor: pointer;
+    -webkit-transition: background @fast;
     &.active::after {
-      @size: 7px;
+      @size: @margin;
       display: block;
       content: '';
       position: absolute;
       left: 50%;
-      bottom: 0px;
+      bottom: -2*@size;
       margin: 0px 0px 0px -1 * @size;
       border: @size solid transparent;
-      border-bottom-color: #FFF;
+      border-top-color: @contentbackgroundcolor;
+      -webkit-transition: border-top-color @fast;
+    }
+    &:hover {
+      background: @decorationcolor;
+      &.active::after {
+        border-top-color: @decorationcolor;
+      }
     }
   }
 }
@@ -328,11 +406,15 @@ ul.categorySelector {
 
 //#frontpageContent {
   article {
-    padding: 10px 0px 7px;
+    padding: 0px 0px 7px;
     margin-bottom: 14px;
     border-bottom: 1px solid #DDD;
+    background: @contentbackgroundcolor;
+    border: 1px solid #FFF;
+    .drop-shadow;
+    
     .topimg {
-      margin: 4px 0 10px;
+      margin: 0px 0 @margin;
     }
     .content {
       position: relative;
@@ -354,11 +436,37 @@ footer {
   background: url(../img/bgFooter.png) @footerbackgroundcolor;
   color: #FFF;
   padding: 21px 0 0;
-  margin: -28px 0 0;
+  margin: 40px 0 0;
+  position: relative;
+  z-index: 0;
   .wrapper {
     margin-bottom: 0px;
     padding: 0px 0px 30px;
     background: none;
+  }
+  
+  .gradients {
+    .gradient( rgba(0,0,0,0.3), rgba(0,0,0,0));
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 140px;
+    display: block;
+    content: '';
+    z-index: 1;
+  
+    &::before {
+      .gradient( rgba(255,250,230,0), rgba(255,250,230,0.6));
+      position: absolute;
+      top: -150px;
+      left: 0px;
+      width: 100%;
+      height: 150px;
+      display: block;
+      content: '';
+      z-index: -10;
+    }
   }
 }
 

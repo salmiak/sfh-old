@@ -17,11 +17,13 @@
     		<div class="slide">
     		  <?php the_dateIcon( $post ); ?>
       		<div class="container_6"><div class="frontpageSliderImgContainer">
-        		 <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'responsive' ) ) ?>
+        		 <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'withFiller' ) ) ?>
+        		 <img src="<? bloginfo('template_url'); ?>/img/sliderFiller.png" class="responsive" />
       		</div></div>
       		<div class="frontpageSliderTextContainer container_3"><div class="inside">
-      		  <h2 class="title"><?php the_title() ?></h2>
-            <p><?php the_content() ?></p>
+      		  <h2 class="title"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h2>
+      		  <p><?php the_content() ?></p>
+      		  <p class="text-right"><a href="<?php the_permalink(); ?>">Läs mer</a></p>
       		</div></div>
       		<div class="clear"></div>
     		</div>
@@ -51,6 +53,8 @@
   		  </ul>
 		  </div></div>
 		  
+		  <div class="clear"></div>
+		  
 		  <?php // The Query
       $the_query = new WP_Query( 'post_type=tribe_events' );
       
@@ -59,7 +63,7 @@
       	while ( $the_query->have_posts() ) {
       		$the_query->the_post(); ?>
     
-  		<article class="inside">
+  		<article class="inside withPadding">
   		  <a href="<?php the_permalink(); ?>">
   		    <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'topimg responsive' ) ) ?>
   		  </a>
@@ -67,7 +71,7 @@
   		  
   		  <div class="content">
   		    <?php the_dateIcon( $post ); ?>
-    		  <a href="<?php the_permalink(); ?>"><h2 class="title"><?php the_title() ?></h2></a>
+    		  <h2 class="title"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h2>
     		  <p><?php the_content() ?></p>
     		  <p class="text-right"><a href="<?php the_permalink(); ?>">Läs mer</a></p>
   		  </div>

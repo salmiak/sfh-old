@@ -1,4 +1,5 @@
   <footer>
+    <div class="gradients"></div>
     <div class="wrapper">
       <div class="container_6">&nbsp;</div>
       <div class="container_3">
