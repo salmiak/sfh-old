@@ -16,9 +16,10 @@
 
 @bodybackgroundcolor: #75c3d6;
 @contentbackgroundcolor: #f2f2f2;
-@decorationcolor: #ec4855;
+@decorationcolor: #ff2247;
 @footerbackgroundcolor: #1b313a;
-@textcolor: #444;
+//@textcolor: #444;
+@textcolor: rgba(0,0,0,0.73);
 
 // --- Mixins and reusables
 
@@ -123,10 +124,10 @@ h2 {
   font-size: @bodyfontsize * 1.8;
 }
 h3 {
-  font-size: @bodyfontsize * 1.3;
+  font-size: @bodyfontsize * 1.4;
 }
 h4 {
-  font-size: @bodyfontsize;
+  font-size: @bodyfontsize * 1.2;
   font-weight: 600;
 }
 
@@ -134,13 +135,12 @@ p {
   margin: 0 0 7px;
 }
 
-a {
+a, a:visited, a:active {
   color: @decorationcolor;
   text-decoration: none;
   -webkit-transition: color @fast;
-  &:hover {
-    color: darken(@decorationcolor, 20%);
-  }
+  &:hover { color: darken(@decorationcolor, 20%);}
+  
   .title & {
     color: @textcolor;
     &:hover {
@@ -367,36 +367,38 @@ ul.categorySelector {
   font-size: 0px;
   //border: 1px solid #FFF;
   .drop-shadow;
-  li {
-    display: inline-block;
-    
-    font-family: @sansseriffont;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 32px;
-    .capitals;
-    letter-spacing: 2px;
-    padding: 0px 14px;
-    border-right: 2px solid @bodybackgroundcolor;
-    position: relative;
-    cursor: pointer;
-    -webkit-transition: background @fast;
-    &.active::after {
-      @size: @margin;
+  li { 
+      display: inline-block;
+    a {
       display: block;
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: -2*@size;
-      margin: 0px 0px 0px -1 * @size;
-      border: @size solid transparent;
-      border-top-color: @contentbackgroundcolor;
-      -webkit-transition: border-top-color @fast;
-    }
-    &:hover {
-      background: @decorationcolor;
+      font-family: @sansseriffont;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 32px;
+      .capitals;
+      letter-spacing: 2px;
+      padding: 0px 14px;
+      border-right: 2px solid @bodybackgroundcolor;
+      position: relative;
+      cursor: pointer;
+      -webkit-transition: background @fast;
       &.active::after {
-        border-top-color: @decorationcolor;
+        @size: @margin;
+        display: block;
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -2*@size;
+        margin: 0px 0px 0px -1 * @size;
+        border: @size solid transparent;
+        border-top-color: @contentbackgroundcolor;
+        -webkit-transition: border-top-color @fast;
+      }
+      &:hover {
+        background: @decorationcolor;
+        &.active::after {
+          border-top-color: @decorationcolor;
+        }
       }
     }
   }
@@ -428,6 +430,26 @@ ul.categorySelector {
     }
   }
 //}
+
+// Sidebar
+#sidebar {
+  section {
+    border-bottom: 2px solid fadeout(@textcolor, 30%);
+    margin: @margin 0 0 0;
+    padding: @margin 0;
+  }
+  
+  h4 {
+    margin-bottom: @margin;
+  }
+  
+  .textwidget {
+    padding: 0px 0px @margin;
+    p:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
 
 
 // Footer
