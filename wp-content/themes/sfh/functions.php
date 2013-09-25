@@ -62,6 +62,16 @@ function event_dateIcon( $event = null, $displayTime = true, $dateFormat = '' ) 
 <?php
 }
 
+
+function get_cat_list($post) {
+	$event_cat = wp_get_post_terms($post->ID, 'tribe_events_cat');
+	$event_cat_list = array();
+	foreach( $event_cat as $cat ) {
+		array_push( $event_cat_list, $cat->name );
+	}
+  return join(', ', $event_cat_list);
+}
+
 //---------------------------------------------------------------------------------
 //	Aktivera widgets
 //---------------------------------------------------------------------------------

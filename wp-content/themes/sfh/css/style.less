@@ -41,6 +41,12 @@ img.withFiller {
   letter-spacing: 0.07em;
 }
 
+ul.no-decoration {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
 // From: http://css-tricks.com/snippets/css/useful-css3-less-mixins/
 .gradient (@startColor: #eee, @endColor: white) {
 	background-color: @startColor;
@@ -111,10 +117,10 @@ h1, h2, h3, h4, h5 {
   font-weight: 400;
   font-style: italic;
   line-height: 1.2em;
-  margin-bottom: 7px;
+  margin-bottom: 14px;
   
   &.title {
-    margin-top: 0px;
+    //margin-top: 0px;
   }
 }
 h1 {
@@ -217,6 +223,16 @@ body {
   // margin-bottom: 14px;
 }
 
+.cats {
+  .capitals;
+  font-family: @sansseriffont;
+  font-weight: 900;
+  font-size: 0.75em;
+  display: block;
+  float: left;
+  margin-right: 7px;
+  color: @decorationcolor;
+}
 
 // --- Specifics
 
@@ -267,6 +283,7 @@ body {
           text-decoration: none;
           display: inline-block;
           padding: 0px 10px;
+          -webkit-transition: all @fast;
           &:hover {
             background: lighten(@decorationcolor, 20%);
             background: rgba(255,255,255,0.2);
@@ -461,6 +478,8 @@ footer {
   margin: 40px 0 0;
   position: relative;
   z-index: 0;
+  font-family: @sansseriffont;
+  font-size: @bodyfontsize*0.9;
   .wrapper {
     margin-bottom: 0px;
     padding: 0px 0px 30px;
@@ -490,21 +509,40 @@ footer {
       z-index: -10;
     }
   }
+
+  .map {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 7px;
+    line-height: 200px;
+    text-align: center;
+    background: #ddd;
+    color: #bbb;
+  }
+  adress {
+    display: block;
+    margin: 0px 35px 14px 0px;
+    float: left;
+  }
+  .contantInfo {
+    float: left;
+    display: block;
+    margin-bottom: 14px;
+  }
 }
 
-.map {
-  width: 100%;
-  height: 200px;
-  margin-bottom: 7px;
-line-height: 200px;
-text-align: center;
-background: #ddd;
-color: #bbb;
+// Maps
+.headerMap {
+  position: relative;
+  margin-bottom: @margin;
+  #map-canvas {
+    border: 1px solid #DDD;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
 }
-adress {
-  display: block;
-  margin: 0px 0px 7px;
-}
-
 
 @import 'helpers.less';

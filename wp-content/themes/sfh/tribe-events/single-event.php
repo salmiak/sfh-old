@@ -19,26 +19,22 @@ $event_id = get_the_ID();
 ?>
 
   <div id="singlePage" class="wrapper">
-    <div class="container_5">
+    <div class="container_6">
     
-    <?php while ( have_posts() ) :  the_post(); ?>
-    
-      <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>><div class="inside">
-  		  <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'topimg responsive' ) ) ?>
-        <div class="content">
-        
-          <?php echo event_dateIcon( ); ?>
-        
-          <h1 class="title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permalänk till <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
-          
-          <div class="post-content">
-            <?php the_content( ); ?>
-            <?php wp_link_pages(); ?>
-          </div><!-- slut post-content -->
-          
-        </div>
-        
-      </div></article>
+    <?php while ( have_posts() ) :  the_post(); 
+      $post = get_post( $event_id); ?>
+ 
+  		<article class="inside withPadding">
+		    <?php echo get_the_post_thumbnail( $post_id, 'topImage', array( 'class' => 'topimg responsive' ) ) ?>
+  		  <div class="content">
+  		    <?php the_dateIcon( $post ); ?>
+    		  <h1 class="title"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h1>
+  		    <div class="cats"><?php echo get_cat_list($post);  ?></div>
+  		    <?php the_content() ?>
+  		  </div>
+  		  
+  		</article>
+  		<div class="clear"></div>
       
     <?php endwhile; ?>
       
@@ -50,7 +46,7 @@ $event_id = get_the_ID();
       -->
     
     </div>
-    <div class="container_4"><div class="inside">
+    <div class="container_3"><div class="inside">
     		<?php get_sidebar(); ?>
     </div></div>
     <div class="clear"></div>
